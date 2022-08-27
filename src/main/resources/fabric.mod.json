@@ -15,7 +15,7 @@
   "environment": "*",
   "entrypoints": {
     "main": [
-      "com.diskriminant.ahk.ExampleMod"
+      "com.diskriminant.ahk.AchievementHardcoreMod"
     ]
   },
   "mixins": [

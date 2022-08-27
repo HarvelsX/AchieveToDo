@@ -1,6 +1,6 @@
 package com.diskriminant.ahk.mixin;
 
-import com.diskriminant.ahk.ExampleMod;
+import com.diskriminant.ahk.AchievementHardcoreMod;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.item.ItemStack;
@@ -14,8 +14,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public class EntityMixin {
 
     @Inject(method = "dropStack(Lnet/minecraft/item/ItemStack;F)Lnet/minecraft/entity/ItemEntity;", at = @At("HEAD"), cancellable = true)
-    public void disableTotem(ItemStack itemStack, float yOffset, CallbackInfoReturnable<ItemEntity> cir) {
-        if (!ExampleMod.allowTotemDrop && itemStack != null && itemStack.getItem() == Items.TOTEM_OF_UNDYING) {
+    public void dropStackInject(ItemStack itemStack, float yOffset, CallbackInfoReturnable<ItemEntity> cir) {
+        if (!AchievementHardcoreMod.allowTotemDrop && itemStack != null && itemStack.getItem() == Items.TOTEM_OF_UNDYING) {
             cir.setReturnValue(null);
         }
     }

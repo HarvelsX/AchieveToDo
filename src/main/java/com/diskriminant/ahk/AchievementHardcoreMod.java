@@ -7,7 +7,8 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.util.ActionResult;
 
-public class ExampleMod implements ModInitializer {
+public class AchievementHardcoreMod implements ModInitializer {
+
     public static boolean allowEnchantingTable;
     public static boolean allowVillagerTrades;
     public static boolean allowTotemDrop;
