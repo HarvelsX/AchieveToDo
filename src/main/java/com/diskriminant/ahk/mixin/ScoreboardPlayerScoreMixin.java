@@ -14,14 +14,15 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(ScoreboardPlayerScore.class)
 public class ScoreboardPlayerScoreMixin {
 
-    @Shadow @Final @Nullable private ScoreboardObjective objective;
+    @Shadow
+    @Final
+    @Nullable
+    private ScoreboardObjective objective;
 
     @Inject(method = "setScore", at = @At("HEAD"))
     public void setScoreInject(int score, CallbackInfo ci) {
-        if (this.objective != null && this.objective.getName().equals("bac_advancements")) {
-            AchievementHardcoreMod.allowEnchantingTable = score > 20;
-            AchievementHardcoreMod.allowVillagerTrades = score > 9;
-            AchievementHardcoreMod.allowTotemDrop = score > 23;
+        if (this.objective != null && this.objective.getName().equalsIgnoreCase("bac_advancements")) {
+            AchievementHardcoreMod.setAchievementsCount(score);
         }
     }
 }

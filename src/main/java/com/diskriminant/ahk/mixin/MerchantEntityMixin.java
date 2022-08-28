@@ -13,7 +13,7 @@ public class MerchantEntityMixin {
 
     @Inject(method = "getOffers", at = @At("HEAD"), cancellable = true)
     private void getOffersInject(CallbackInfoReturnable<TradeOfferList> cir) {
-        if (!AchievementHardcoreMod.allowVillagerTrades) {
+        if (!AchievementHardcoreMod.isAllowTradeWithVillagers) {
             cir.setReturnValue(new TradeOfferList());
         }
     }

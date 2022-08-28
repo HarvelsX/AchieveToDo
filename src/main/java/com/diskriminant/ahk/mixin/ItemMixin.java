@@ -1,5 +1,6 @@
 package com.diskriminant.ahk.mixin;
 
+import com.diskriminant.ahk.AchievementHardcoreMod;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.item.Item;
@@ -11,16 +12,20 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Mixin(Item.class)
-public class LivingEntityMixin {
+public class ItemMixin {
 
     @Inject(method = "getMaxUseTime", at = @At("HEAD"), cancellable = true)
     private void getMaxUseTimeInject(ItemStack stack, CallbackInfoReturnable<Integer> cir) {
-        cir.setReturnValue(9);
+        if (stack != null && stack.getItem() != null && stack.getItem().isFood() && AchievementHardcoreMod.isProhibitionedFood(stack.getItem().getFoodComponent())) {
+            cir.setReturnValue(9);
+        }
     }
 
     @Inject(method = "finishUsing", at = @At("HEAD"), cancellable = true)
     private void finishUsingInject(ItemStack stack, World world, LivingEntity user, CallbackInfoReturnable<ItemStack> cir) {
-        MinecraftClient.getInstance().options.useKey.setPressed(false);
-        cir.setReturnValue(stack);
+        if (stack != null && stack.getItem() != null && stack.getItem().isFood() && AchievementHardcoreMod.isProhibitionedFood(stack.getItem().getFoodComponent())) {
+            MinecraftClient.getInstance().options.useKey.setPressed(false);
+            cir.setReturnValue(stack);
+        }
     }
 }
