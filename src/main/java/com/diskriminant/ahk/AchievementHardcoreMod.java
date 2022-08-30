@@ -89,14 +89,53 @@ public class AchievementHardcoreMod implements ModInitializer {
     public static boolean isAllowUsingEnchantingTable;
     public static boolean isAllowDropTotem;
 
-    private static final List<FoodComponent> prohibitionedFood = new ArrayList<>(Arrays.asList(
-            APPLE, BAKED_POTATO, BEEF, BREAD, CARROT, CHICKEN, CHORUS_FRUIT, COOKED_BEEF, COOKED_CHICKEN, COOKED_COD,
-            COOKED_MUTTON, COOKED_PORKCHOP, COOKED_RABBIT, COOKED_SALMON, COOKIE, ENCHANTED_GOLDEN_APPLE, GOLDEN_APPLE,
-            GOLDEN_CARROT, HONEY_BOTTLE, MUTTON, PORKCHOP, POTATO, PUMPKIN_PIE, RABBIT, SWEET_BERRIES, GLOW_BERRIES
-    ));
-    private static int foodProhibitionLevel = 5;
+    private static int foodProhibitionLevel;
+    private static final List<FoodComponent> prohibitionedFood = new ArrayList<>();
 
     public static void setAchievementsCount(int count) {
+        if (count == 0) {
+            lastAchievementsCount = 0;
+            isAllowJump = false;
+            isAllowSprint = false;
+            isAllowSneak = false;
+            isAllowBreakBlocksInPositiveY = false;
+            isAllowPlaceBlocks = false;
+            isAllowUsingBoat = false;
+            isAllowUsingCraftingTable = false;
+            isAllowUsingFurnace = false;
+            isAllowUsingIronTools = false;
+            isAllowUsingShield = false;
+            isAllowUsingWaterBucket = false;
+            isAllowDressIronArmor = false;
+            isAllowUsingSmoker = false;
+            isAllowUsingBlastFurnace = false;
+            isAllowUsingAnvil = false;
+            isAllowBreakBlocksInNegativeY = false;
+            isAllowMoveToNetherDimension = false;
+            isAllowUsingDiamondTools = false;
+            isAllowDressDiamondArmor = false;
+            isAllowUsingBrewingStand = false;
+            isAllowUsingBeacon = false;
+            isAllowNetheriteTools = false;
+            isAllowDressNetheriteArmor = false;
+            isAllowMoveToEnderDimension = false;
+            isAllowDressElytra = false;
+            isAllowUsingFireworksWhileFly = false;
+            isAllowTeleportViaEndGate = false;
+            isAllowUsingEnderChest = false;
+            isAllowUsingShulkerBox = false;
+            isAllowTradeWithVillagers = false;
+            isAllowUsingEnchantingTable = false;
+            isAllowDropTotem = false;
+            foodProhibitionLevel = 5;
+            prohibitionedFood.clear();
+            prohibitionedFood.addAll(Arrays.asList(
+                    APPLE, BAKED_POTATO, BEEF, BREAD, CARROT, CHICKEN, CHORUS_FRUIT, COOKED_BEEF, COOKED_CHICKEN,
+                    COOKED_COD, COOKED_MUTTON, COOKED_PORKCHOP, COOKED_RABBIT, COOKED_SALMON, COOKIE,
+                    ENCHANTED_GOLDEN_APPLE, GOLDEN_APPLE, GOLDEN_CARROT, HONEY_BOTTLE, MUTTON, PORKCHOP, POTATO,
+                    PUMPKIN_PIE, RABBIT, SWEET_BERRIES, GLOW_BERRIES
+            ));
+        }
         if (lastAchievementsCount == count) {
             return;
         }
