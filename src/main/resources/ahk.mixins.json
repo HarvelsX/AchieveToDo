@@ -18,6 +18,7 @@
     "MerchantEntityMixin",
     "PlayerEntityMixin",
     "ScoreboardPlayerScoreMixin",
+    "ServerPlayerEntityMixin",
     "ShulkerBoxBlockMixin"
   ],
   "client": [
