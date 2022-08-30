@@ -273,13 +273,6 @@ public class AchievementHardcoreMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
-        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
-            BlockEntity blockEntity = world.getBlockEntity(hitResult.getBlockPos());
-            if (!isAllowUsingEnchantingTable && blockEntity != null && blockEntity.getType() == BlockEntityType.ENCHANTING_TABLE) {
-                return ActionResult.FAIL;
-            }
-            return ActionResult.PASS;
-        });
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
             if (world != null && world.getRegistryKey() == World.OVERWORLD && pos != null) {
                 if (!isAllowBreakBlocksInPositiveY && pos.getY() >= 0 || !isAllowBreakBlocksInNegativeY && pos.getY() < 0) {

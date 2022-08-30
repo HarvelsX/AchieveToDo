@@ -4,13 +4,21 @@
   "package": "com.diskriminant.ahk.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "AbstractFurnaceBlockMixin",
+    "AnvilBlockMixin",
+    "BeaconBlockMixin",
     "BoatEntityMixin",
+    "BrewingStandBlockMixin",
+    "CraftingTableBlockMixin",
+    "EnchantingTableBlockMixin",
+    "EnderChestBlockMixin",
     "EntityMixin",
     "ItemMixin",
     "ItemStackMixin",
     "MerchantEntityMixin",
     "PlayerEntityMixin",
-    "ScoreboardPlayerScoreMixin"
+    "ScoreboardPlayerScoreMixin",
+    "ShulkerBoxBlockMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin"
