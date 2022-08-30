@@ -6,6 +6,7 @@
   "mixins": [
     "EntityMixin",
     "ItemMixin",
+    "ItemStackMixin",
     "MerchantEntityMixin",
     "PlayerEntityMixin",
     "ScoreboardPlayerScoreMixin"
