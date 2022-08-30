@@ -14,16 +14,18 @@ public class LivingEntityMixin {
 
     @Inject(method = "getPreferredEquipmentSlot", at = @At("HEAD"), cancellable = true)
     private static void getPreferredEquipmentSlotInject(ItemStack stack, CallbackInfoReturnable<EquipmentSlot> cir) {
-        if (!AchievementHardcoreMod.isAllowEquipElytra && stack.isOf(Items.ELYTRA)) {
-            cir.setReturnValue(EquipmentSlot.MAINHAND);
-        } else {
-            Item item = stack.getItem();
-            if (item instanceof ArmorItem) {
-                ArmorMaterial armorMaterial = ((ArmorItem) item).getMaterial();
-                if (!AchievementHardcoreMod.isAllowEquipIronArmor && armorMaterial == ArmorMaterials.IRON ||
-                        !AchievementHardcoreMod.isAllowEquipDiamondArmor && armorMaterial == ArmorMaterials.DIAMOND ||
-                        !AchievementHardcoreMod.isAllowEquipNetheriteArmor && armorMaterial == ArmorMaterials.NETHERITE) {
-                    cir.setReturnValue(EquipmentSlot.MAINHAND);
+        if (stack.getHolder() == null) {
+            if (!AchievementHardcoreMod.isAllowEquipElytra && stack.isOf(Items.ELYTRA)) {
+                cir.setReturnValue(EquipmentSlot.MAINHAND);
+            } else {
+                Item item = stack.getItem();
+                if (item instanceof ArmorItem) {
+                    ArmorMaterial armorMaterial = ((ArmorItem) item).getMaterial();
+                    if (!AchievementHardcoreMod.isAllowEquipIronArmor && armorMaterial == ArmorMaterials.IRON ||
+                            !AchievementHardcoreMod.isAllowEquipDiamondArmor && armorMaterial == ArmorMaterials.DIAMOND ||
+                            !AchievementHardcoreMod.isAllowEquipNetheriteArmor && armorMaterial == ArmorMaterials.NETHERITE) {
+                        cir.setReturnValue(EquipmentSlot.MAINHAND);
+                    }
                 }
             }
         }
