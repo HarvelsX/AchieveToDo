@@ -2,7 +2,9 @@ package com.diskriminant.ahk;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
-import net.minecraft.item.FoodComponent;
+import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
+import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.minecraft.item.*;
 import net.minecraft.util.ActionResult;
 import net.minecraft.world.World;
 
@@ -268,6 +270,19 @@ public class AchievementHardcoreMod implements ModInitializer {
         return foodProhibitionLevel > 0 && prohibitionedFood.contains(food);
     }
 
+    private boolean needPreventToolUsage(ItemStack itemStack) {
+        if (itemStack.isDamageable()) {
+            Item item = itemStack.getItem();
+            if (item instanceof ToolItem) {
+                ToolMaterial toolMaterial = ((ToolItem) item).getMaterial();
+                return !AchievementHardcoreMod.isAllowUsingIronTools && toolMaterial == ToolMaterials.IRON ||
+                        !AchievementHardcoreMod.isAllowUsingDiamondTools && toolMaterial == ToolMaterials.DIAMOND ||
+                        !AchievementHardcoreMod.isAllowNetheriteTools && toolMaterial == ToolMaterials.NETHERITE;
+            }
+        }
+        return false;
+    }
+
     @Override
     public void onInitialize() {
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
@@ -275,6 +290,22 @@ public class AchievementHardcoreMod implements ModInitializer {
                 if (!isAllowBreakBlocksInPositiveY && pos.getY() >= 0 || !isAllowBreakBlocksInNegativeY && pos.getY() < 0) {
                     return ActionResult.FAIL;
                 }
+            }
+            if (needPreventToolUsage(player.getInventory().getMainHandStack())) {
+                return ActionResult.FAIL;
+            }
+            return ActionResult.PASS;
+        });
+        AttackEntityCallback.EVENT.register((player, world, hand, entity, hitResult) -> {
+            if (needPreventToolUsage(player.getInventory().getMainHandStack())) {
+                return ActionResult.FAIL;
+            }
+            return ActionResult.PASS;
+        });
+        UseBlockCallback.EVENT.register((player, world, hand, hitResult) -> {
+            ItemStack itemStack = player.getInventory().getMainHandStack();
+            if (needPreventToolUsage(itemStack)) {
+                return ActionResult.FAIL;
             }
             return ActionResult.PASS;
         });
