@@ -2,9 +2,6 @@ package com.diskriminant.ahk;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
-import net.fabricmc.fabric.api.event.player.UseBlockCallback;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.util.ActionResult;
 import net.minecraft.world.World;
@@ -17,45 +14,45 @@ import static net.minecraft.item.FoodComponents.*;
 
 public class AchievementHardcoreMod implements ModInitializer {
 
-    private static int lastAchievementsCount;
+    private static final int countForAllowJump = 10;
+    private static final int countForAllowSprint = 15;
+    private static final int countForAllowSneak = 20;
+    private static final int countForAllowBreakBlocksInPositiveY = 25;
+    private static final int countForAllowPlaceBlocks = 30;
+    private static final int countForAllowUsingBoat = 40;
+    private static final int countForAllowUsingCraftingTable = 50;
+    private static final int countForAllowUsingFurnace = 60;
+    private static final int countForAllowUsingIronTools = 70;
+    private static final int countForAllowUsingShield = 80;
+    private static final int countForAllowUsingWaterBucket = 90;
+    private static final int countForSetFoodProhibitionLevelTo_4 = 100;
+    private static final int countForAllowEquipIronArmor = 110;
+    private static final int countForAllowUsingSmoker = 125;
+    private static final int countForAllowUsingBlastFurnace = 150;
+    private static final int countForAllowUsingAnvil = 175;
+    private static final int countForAllowBreakBlocksInNegativeY = 200;
+    private static final int countForSetFoodProhibitionLevelTo_3 = 250;
+    private static final int countForAllowMoveToNetherDimension = 300;
+    private static final int countForAllowUsingDiamondTools = 350;
+    private static final int countForAllowEquipDiamondArmor = 400;
+    private static final int countForAllowUsingBrewingStand = 450;
+    private static final int countForSetFoodProhibitionLevelTo_2 = 500;
+    private static final int countForAllowUsingBeacon = 600;
+    private static final int countForAllowNetheriteTools = 650;
+    private static final int countForAllowEquipNetheriteArmor = 700;
+    private static final int countForAllowMoveToEnderDimension = 725;
+    private static final int countForSetFoodProhibitionLevelTo_1 = 750;
+    private static final int countForAllowEquipElytra = 775;
+    private static final int countForAllowUsingFireworksWhileFly = 800;
+    private static final int countForAllowTeleportViaEndGate = 825;
+    private static final int countForAllowUsingEnderChest = 850;
+    private static final int countForAllowUsingShulkerBox = 875;
+    private static final int countForSetFoodProhibitionLevelTo_0 = 900;
+    private static final int countForAllowTradeWithVillagers = 925;
+    private static final int countForAllowUsingEnchantingTable = 950;
+    private static final int countForAllowDropTotem = 1000;
 
-    private static int countForAllowJump = 10;
-    private static int countForAllowSprint = 15;
-    private static int countForAllowSneak = 20;
-    private static int countForAllowBreakBlocksInPositiveY = 25;
-    private static int countForAllowPlaceBlocks = 30;
-    private static int countForAllowUsingBoat = 40;
-    private static int countForAllowUsingCraftingTable = 50;
-    private static int countForAllowUsingFurnace = 60;
-    private static int countForAllowUsingIronTools = 70;
-    private static int countForAllowUsingShield = 80;
-    private static int countForAllowUsingWaterBucket = 90;
-    private static int countForSetFoodProhibitionLevelTo_4 = 100;
-    private static int countForAllowDressIronArmor = 110;
-    private static int countForAllowUsingSmoker = 125;
-    private static int countForAllowUsingBlastFurnace = 150;
-    private static int countForAllowUsingAnvil = 175;
-    private static int countForAllowBreakBlocksInNegativeY = 200;
-    private static int countForSetFoodProhibitionLevelTo_3 = 250;
-    private static int countForAllowMoveToNetherDimension = 300;
-    private static int countForAllowUsingDiamondTools = 350;
-    private static int countForAllowDressDiamondArmor = 400;
-    private static int countForAllowUsingBrewingStand = 450;
-    private static int countForSetFoodProhibitionLevelTo_2 = 500;
-    private static int countForAllowUsingBeacon = 600;
-    private static int countForAllowNetheriteTools = 650;
-    private static int countForAllowDressNetheriteArmor = 700;
-    private static int countForAllowMoveToEnderDimension = 725;
-    private static int countForSetFoodProhibitionLevelTo_1 = 750;
-    private static int countForAllowDressElytra = 775;
-    private static int countForAllowUsingFireworksWhileFly = 800;
-    private static int countForAllowTeleportViaEndGate = 825;
-    private static int countForAllowUsingEnderChest = 850;
-    private static int countForAllowUsingShulkerBox = 875;
-    private static int countForSetFoodProhibitionLevelTo_0 = 900;
-    private static int countForAllowTradeWithVillagers = 925;
-    private static int countForAllowUsingEnchantingTable = 950;
-    private static int countForAllowDropTotem = 1000;
+    private static int lastAchievementsCount;
 
     public static boolean isAllowJump;
     public static boolean isAllowSprint;
@@ -68,20 +65,20 @@ public class AchievementHardcoreMod implements ModInitializer {
     public static boolean isAllowUsingIronTools;
     public static boolean isAllowUsingShield;
     public static boolean isAllowUsingWaterBucket;
-    public static boolean isAllowDressIronArmor;
+    public static boolean isAllowEquipIronArmor;
     public static boolean isAllowUsingSmoker;
     public static boolean isAllowUsingBlastFurnace;
     public static boolean isAllowUsingAnvil;
     public static boolean isAllowBreakBlocksInNegativeY;
     public static boolean isAllowMoveToNetherDimension;
     public static boolean isAllowUsingDiamondTools;
-    public static boolean isAllowDressDiamondArmor;
+    public static boolean isAllowEquipDiamondArmor;
     public static boolean isAllowUsingBrewingStand;
     public static boolean isAllowUsingBeacon;
     public static boolean isAllowNetheriteTools;
-    public static boolean isAllowDressNetheriteArmor;
+    public static boolean isAllowEquipNetheriteArmor;
     public static boolean isAllowMoveToEnderDimension;
-    public static boolean isAllowDressElytra;
+    public static boolean isAllowEquipElytra;
     public static boolean isAllowUsingFireworksWhileFly;
     public static boolean isAllowTeleportViaEndGate;
     public static boolean isAllowUsingEnderChest;
@@ -107,20 +104,20 @@ public class AchievementHardcoreMod implements ModInitializer {
             isAllowUsingIronTools = false;
             isAllowUsingShield = false;
             isAllowUsingWaterBucket = false;
-            isAllowDressIronArmor = false;
+            isAllowEquipIronArmor = false;
             isAllowUsingSmoker = false;
             isAllowUsingBlastFurnace = false;
             isAllowUsingAnvil = false;
             isAllowBreakBlocksInNegativeY = false;
             isAllowMoveToNetherDimension = false;
             isAllowUsingDiamondTools = false;
-            isAllowDressDiamondArmor = false;
+            isAllowEquipDiamondArmor = false;
             isAllowUsingBrewingStand = false;
             isAllowUsingBeacon = false;
             isAllowNetheriteTools = false;
-            isAllowDressNetheriteArmor = false;
+            isAllowEquipNetheriteArmor = false;
             isAllowMoveToEnderDimension = false;
-            isAllowDressElytra = false;
+            isAllowEquipElytra = false;
             isAllowUsingFireworksWhileFly = false;
             isAllowTeleportViaEndGate = false;
             isAllowUsingEnderChest = false;
@@ -180,8 +177,8 @@ public class AchievementHardcoreMod implements ModInitializer {
                     APPLE, POTATO, GLOW_BERRIES, SWEET_BERRIES, HONEY_BOTTLE, BREAD, COOKIE
             ));
         }
-        if (count >= countForAllowDressIronArmor) {
-            isAllowDressIronArmor = true;
+        if (count >= countForAllowEquipIronArmor) {
+            isAllowEquipIronArmor = true;
         }
         if (count >= countForAllowUsingSmoker) {
             isAllowUsingSmoker = true;
@@ -207,8 +204,8 @@ public class AchievementHardcoreMod implements ModInitializer {
         if (count >= countForAllowUsingDiamondTools) {
             isAllowUsingDiamondTools = true;
         }
-        if (count >= countForAllowDressDiamondArmor) {
-            isAllowDressDiamondArmor = true;
+        if (count >= countForAllowEquipDiamondArmor) {
+            isAllowEquipDiamondArmor = true;
         }
         if (count >= countForAllowUsingBrewingStand) {
             isAllowUsingBrewingStand = true;
@@ -225,8 +222,8 @@ public class AchievementHardcoreMod implements ModInitializer {
         if (count >= countForAllowNetheriteTools) {
             isAllowNetheriteTools = true;
         }
-        if (count >= countForAllowDressNetheriteArmor) {
-            isAllowDressNetheriteArmor = true;
+        if (count >= countForAllowEquipNetheriteArmor) {
+            isAllowEquipNetheriteArmor = true;
         }
         if (count >= countForAllowMoveToEnderDimension) {
             isAllowMoveToEnderDimension = true;
@@ -237,8 +234,8 @@ public class AchievementHardcoreMod implements ModInitializer {
                     COOKED_CHICKEN, COOKED_MUTTON, CHORUS_FRUIT
             ));
         }
-        if (count >= countForAllowDressElytra) {
-            isAllowDressElytra = true;
+        if (count >= countForAllowEquipElytra) {
+            isAllowEquipElytra = true;
         }
         if (count >= countForAllowUsingFireworksWhileFly) {
             isAllowUsingFireworksWhileFly = true;
