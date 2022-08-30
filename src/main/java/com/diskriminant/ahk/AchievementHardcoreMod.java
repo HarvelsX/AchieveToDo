@@ -7,6 +7,7 @@ import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.block.entity.BlockEntityType;
 import net.minecraft.item.FoodComponent;
 import net.minecraft.util.ActionResult;
+import net.minecraft.world.World;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -280,8 +281,10 @@ public class AchievementHardcoreMod implements ModInitializer {
             return ActionResult.PASS;
         });
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
-            if (!isAllowBreakBlocksInPositiveY && pos != null && pos.getY() < 0) {
-                return ActionResult.FAIL;
+            if (world != null && world.getRegistryKey() == World.OVERWORLD && pos != null) {
+                if (!isAllowBreakBlocksInPositiveY && pos.getY() >= 0 || !isAllowBreakBlocksInNegativeY && pos.getY() < 0) {
+                    return ActionResult.FAIL;
+                }
             }
             return ActionResult.PASS;
         });
