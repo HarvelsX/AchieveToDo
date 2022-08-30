@@ -15,6 +15,7 @@
     "EnchantingTableBlockMixin",
     "EnderChestBlockMixin",
     "EntityMixin",
+    "FireworkRocketItemMixin",
     "ItemMixin",
     "ItemStackMixin",
     "LivingEntityMixin",

@@ -43,11 +43,11 @@ public class AchievementHardcoreMod implements ModInitializer {
     private static final int countForAllowMoveToEnderDimension = 725;
     private static final int countForSetFoodProhibitionLevelTo_1 = 750;
     private static final int countForAllowEquipElytra = 775;
-    private static final int countForAllowUsingFireworksWhileFly = 800;
-    private static final int countForAllowTeleportViaEndGate = 825;
-    private static final int countForAllowUsingEnderChest = 850;
-    private static final int countForAllowUsingShulkerBox = 875;
-    private static final int countForSetFoodProhibitionLevelTo_0 = 900;
+    private static final int countForAllowTeleportViaEndGate = 800;
+    private static final int countForAllowUsingEnderChest = 825;
+    private static final int countForAllowUsingShulkerBox = 850;
+    private static final int countForSetFoodProhibitionLevelTo_0 = 875;
+    private static final int countForAllowUsingFireworksWhileFly = 900;
     private static final int countForAllowTradeWithVillagers = 925;
     private static final int countForAllowUsingEnchantingTable = 950;
     private static final int countForAllowDropTotem = 1000;
@@ -79,10 +79,10 @@ public class AchievementHardcoreMod implements ModInitializer {
     public static boolean isAllowEquipNetheriteArmor;
     public static boolean isAllowMoveToEnderDimension;
     public static boolean isAllowEquipElytra;
-    public static boolean isAllowUsingFireworksWhileFly;
     public static boolean isAllowTeleportViaEndGate;
     public static boolean isAllowUsingEnderChest;
     public static boolean isAllowUsingShulkerBox;
+    public static boolean isAllowUsingFireworksWhileFly;
     public static boolean isAllowTradeWithVillagers;
     public static boolean isAllowUsingEnchantingTable;
     public static boolean isAllowDropTotem;
