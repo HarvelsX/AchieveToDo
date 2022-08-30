@@ -14,6 +14,7 @@
     "ElytraItemMixin",
     "EnchantingTableBlockMixin",
     "EnderChestBlockMixin",
+    "EndGatewayBlockEntityMixin",
     "EntityMixin",
     "FireworkRocketItemMixin",
     "ItemMixin",
