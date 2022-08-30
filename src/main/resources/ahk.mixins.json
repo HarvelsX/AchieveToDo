@@ -4,6 +4,7 @@
   "package": "com.diskriminant.ahk.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "BoatEntityMixin",
     "EntityMixin",
     "ItemMixin",
     "ItemStackMixin",
