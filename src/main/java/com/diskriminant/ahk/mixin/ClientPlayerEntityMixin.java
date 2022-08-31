@@ -22,7 +22,7 @@ public abstract class ClientPlayerEntityMixin {
 
     @Inject(method = "setSprinting", at = @At("HEAD"), cancellable = true)
     public void setSprintingInject(boolean sprinting, CallbackInfo ci) {
-        if (!AchievementHardcoreMod.isAllowSneak && !((PlayerEntity) ((Object) this)).isTouchingWater()) {
+        if (!AchievementHardcoreMod.isAllowSprint && !((PlayerEntity) ((Object) this)).isTouchingWater()) {
             ci.cancel();
         }
     }

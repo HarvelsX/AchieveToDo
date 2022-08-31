@@ -130,8 +130,8 @@ public class AchievementHardcoreMod implements ModInitializer {
             foodProhibitionLevel = 5;
             prohibitionedFood.clear();
             prohibitionedFood.addAll(Arrays.asList(
-                    APPLE, BAKED_POTATO, BEEF, BREAD, CARROT, CHICKEN, CHORUS_FRUIT, COOKED_BEEF, COOKED_CHICKEN,
-                    COOKED_COD, COOKED_MUTTON, COOKED_PORKCHOP, COOKED_RABBIT, COOKED_SALMON, COOKIE,
+                    APPLE, BAKED_POTATO, BEEF, BREAD, CHICKEN, CHORUS_FRUIT, COOKED_BEEF, COOKED_CHICKEN,
+                    COOKED_COD, COOKED_MUTTON, COOKED_PORKCHOP, COOKED_SALMON, COOKIE,
                     ENCHANTED_GOLDEN_APPLE, GOLDEN_APPLE, GOLDEN_CARROT, HONEY_BOTTLE, MUTTON, PORKCHOP, POTATO,
                     PUMPKIN_PIE, RABBIT, SWEET_BERRIES, GLOW_BERRIES
             ));
@@ -197,7 +197,7 @@ public class AchievementHardcoreMod implements ModInitializer {
         if (count >= countForSetFoodProhibitionLevelTo_3 && foodProhibitionLevel > 3) {
             foodProhibitionLevel = 3;
             prohibitionedFood.addAll(Arrays.asList(
-                    BEEF, RABBIT, CARROT, GOLDEN_APPLE, BAKED_POTATO, PUMPKIN_PIE, COOKED_COD, COOKED_SALMON
+                    BEEF, RABBIT, GOLDEN_APPLE, BAKED_POTATO, PUMPKIN_PIE, COOKED_COD, COOKED_SALMON
             ));
         }
         if (count >= countForAllowMoveToNetherDimension) {
@@ -215,7 +215,7 @@ public class AchievementHardcoreMod implements ModInitializer {
         if (count >= countForSetFoodProhibitionLevelTo_2 && foodProhibitionLevel > 2) {
             foodProhibitionLevel = 2;
             prohibitionedFood.removeAll(Arrays.asList(
-                    PORKCHOP, MUTTON, CHICKEN, COOKED_RABBIT
+                    PORKCHOP, MUTTON, CHICKEN
             ));
         }
         if (count >= countForAllowUsingBeacon) {
