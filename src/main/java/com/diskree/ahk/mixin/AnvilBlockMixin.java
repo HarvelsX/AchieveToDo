@@ -1,8 +1,8 @@
-package com.diskriminant.ahk.mixin;
+package com.diskree.ahk.mixin;
 
-import com.diskriminant.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.AchievementHardcoreMod;
+import net.minecraft.block.AnvilBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.EnchantingTableBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -14,12 +14,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(EnchantingTableBlock.class)
-public class EnchantingTableBlockMixin {
+@Mixin(AnvilBlock.class)
+public class AnvilBlockMixin {
 
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     public void onUseInject(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-        if (!AchievementHardcoreMod.isAllowUsingEnchantingTable) {
+        if (!AchievementHardcoreMod.isAllowUsingAnvil) {
             cir.setReturnValue(ActionResult.FAIL);
         }
     }

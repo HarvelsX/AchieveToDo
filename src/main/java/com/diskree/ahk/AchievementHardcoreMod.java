@@ -1,4 +1,4 @@
-package com.diskriminant.ahk;
+package com.diskree.ahk;
 
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;

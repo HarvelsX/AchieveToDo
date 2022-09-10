@@ -1,10 +1,9 @@
-package com.diskriminant.ahk.mixin;
+package com.diskree.ahk.mixin;
 
-import com.diskriminant.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.AchievementHardcoreMod;
 import net.minecraft.client.network.ClientPlayerEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;

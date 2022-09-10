@@ -1,6 +1,6 @@
-package com.diskriminant.ahk.mixin;
+package com.diskree.ahk.mixin;
 
-import com.diskriminant.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.AchievementHardcoreMod;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;

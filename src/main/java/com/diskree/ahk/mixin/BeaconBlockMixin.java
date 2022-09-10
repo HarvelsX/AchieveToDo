@@ -1,8 +1,8 @@
-package com.diskriminant.ahk.mixin;
+package com.diskree.ahk.mixin;
 
-import com.diskriminant.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.AchievementHardcoreMod;
+import net.minecraft.block.BeaconBlock;
 import net.minecraft.block.BlockState;
-import net.minecraft.block.ShulkerBoxBlock;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
@@ -14,12 +14,12 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-@Mixin(ShulkerBoxBlock.class)
-public class ShulkerBoxBlockMixin {
+@Mixin(BeaconBlock.class)
+public class BeaconBlockMixin {
 
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     public void onUseInject(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-        if (!AchievementHardcoreMod.isAllowUsingEnderChest) {
+        if (!AchievementHardcoreMod.isAllowUsingBeacon) {
             cir.setReturnValue(ActionResult.FAIL);
         }
     }
