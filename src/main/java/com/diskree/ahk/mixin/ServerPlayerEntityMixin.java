@@ -15,8 +15,11 @@ public abstract class ServerPlayerEntityMixin {
 
     @Inject(method = "moveToWorld", at = @At("HEAD"), cancellable = true)
     public void moveToWorldInject(ServerWorld destination, CallbackInfoReturnable<Entity> cir) {
-        if (!AchievementHardcoreMod.isAllowMoveToNetherDimension && destination != null && destination.getRegistryKey() == World.NETHER
-                || !AchievementHardcoreMod.isAllowMoveToEnderDimension && destination != null && destination.getRegistryKey() == World.END) {
+        if (!AchievementHardcoreMod.isAllowMoveToNetherDimension && destination != null && destination.getRegistryKey() == World.NETHER) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowMoveToNetherDimension);
+            cir.setReturnValue((Entity) (Object) this);
+        } else if (!AchievementHardcoreMod.isAllowMoveToEnderDimension && destination != null && destination.getRegistryKey() == World.END) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowMoveToEnderDimension);
             cir.setReturnValue((Entity) (Object) this);
         }
     }

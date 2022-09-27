@@ -16,14 +16,20 @@ public class LivingEntityMixin {
     private static void getPreferredEquipmentSlotInject(ItemStack stack, CallbackInfoReturnable<EquipmentSlot> cir) {
         if (stack.getHolder() == null) {
             if (!AchievementHardcoreMod.isAllowEquipElytra && stack.isOf(Items.ELYTRA)) {
+                AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowEquipElytra);
                 cir.setReturnValue(EquipmentSlot.MAINHAND);
             } else {
                 Item item = stack.getItem();
                 if (item instanceof ArmorItem) {
                     ArmorMaterial armorMaterial = ((ArmorItem) item).getMaterial();
-                    if (!AchievementHardcoreMod.isAllowEquipIronArmor && armorMaterial == ArmorMaterials.IRON ||
-                            !AchievementHardcoreMod.isAllowEquipDiamondArmor && armorMaterial == ArmorMaterials.DIAMOND ||
-                            !AchievementHardcoreMod.isAllowEquipNetheriteArmor && armorMaterial == ArmorMaterials.NETHERITE) {
+                    if (!AchievementHardcoreMod.isAllowEquipIronArmor && armorMaterial == ArmorMaterials.IRON) {
+                        AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowEquipIronArmor);
+                        cir.setReturnValue(EquipmentSlot.MAINHAND);
+                    } else if (!AchievementHardcoreMod.isAllowEquipDiamondArmor && armorMaterial == ArmorMaterials.DIAMOND) {
+                        AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowEquipDiamondArmor);
+                        cir.setReturnValue(EquipmentSlot.MAINHAND);
+                    } else if (!AchievementHardcoreMod.isAllowEquipNetheriteArmor && armorMaterial == ArmorMaterials.NETHERITE) {
+                        AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowEquipNetheriteArmor);
                         cir.setReturnValue(EquipmentSlot.MAINHAND);
                     }
                 }

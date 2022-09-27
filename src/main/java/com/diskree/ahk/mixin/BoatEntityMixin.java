@@ -15,6 +15,7 @@ public class BoatEntityMixin {
     @Inject(method = "canAddPassenger", at = @At("HEAD"), cancellable = true)
     public void canAddPassengerInject(Entity passenger, CallbackInfoReturnable<Boolean> cir) {
         if (!AchievementHardcoreMod.isAllowUsingBoat && passenger instanceof PlayerEntity) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingBoat);
             cir.setReturnValue(false);
         }
     }

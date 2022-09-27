@@ -20,6 +20,7 @@ public class ShulkerBoxBlockMixin {
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     public void onUseInject(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         if (!AchievementHardcoreMod.isAllowUsingShulkerBox) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingShulkerBox);
             cir.setReturnValue(ActionResult.FAIL);
         }
     }

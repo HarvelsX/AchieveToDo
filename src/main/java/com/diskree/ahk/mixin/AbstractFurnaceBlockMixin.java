@@ -18,9 +18,14 @@ public class AbstractFurnaceBlockMixin {
 
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     public void onUseInject(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-        if (!AchievementHardcoreMod.isAllowUsingFurnace && ((Object) this) instanceof FurnaceBlock ||
-                !AchievementHardcoreMod.isAllowUsingSmoker && ((Object) this) instanceof SmokerBlock ||
-                !AchievementHardcoreMod.isAllowUsingBlastFurnace && ((Object) this) instanceof BlastFurnaceBlock) {
+        if (!AchievementHardcoreMod.isAllowUsingFurnace && ((Object) this) instanceof FurnaceBlock) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingFurnace);
+            cir.setReturnValue(ActionResult.FAIL);
+        } else if (!AchievementHardcoreMod.isAllowUsingSmoker && ((Object) this) instanceof SmokerBlock) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingSmoker);
+            cir.setReturnValue(ActionResult.FAIL);
+        } else if (!AchievementHardcoreMod.isAllowUsingBlastFurnace && ((Object) this) instanceof BlastFurnaceBlock) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingBlastFurnace);
             cir.setReturnValue(ActionResult.FAIL);
         }
     }

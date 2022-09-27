@@ -18,6 +18,7 @@ public class ShieldItemMixin {
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     public void useInject(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         if (!AchievementHardcoreMod.isAllowUsingShield) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingShield);
             cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));
         }
     }

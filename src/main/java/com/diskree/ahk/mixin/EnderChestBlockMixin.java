@@ -19,6 +19,7 @@ public class EnderChestBlockMixin {
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     public void onUseInject(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         if (!AchievementHardcoreMod.isAllowUsingEnderChest) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingEnderChest);
             cir.setReturnValue(ActionResult.FAIL);
         }
     }

@@ -20,6 +20,7 @@ public class BeaconBlockMixin {
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     public void onUseInject(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         if (!AchievementHardcoreMod.isAllowUsingBeacon) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingBeacon);
             cir.setReturnValue(ActionResult.FAIL);
         }
     }

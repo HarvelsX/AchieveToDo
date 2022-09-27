@@ -20,6 +20,7 @@ public class EnchantingTableBlockMixin {
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     public void onUseInject(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         if (!AchievementHardcoreMod.isAllowUsingEnchantingTable) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingEnchantingTable);
             cir.setReturnValue(ActionResult.FAIL);
         }
     }

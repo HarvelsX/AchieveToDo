@@ -20,6 +20,7 @@ public class BrewingStandBlockMixin {
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     public void onUseInject(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
         if (!AchievementHardcoreMod.isAllowUsingBrewingStand) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingBrewingStand);
             cir.setReturnValue(ActionResult.FAIL);
         }
     }

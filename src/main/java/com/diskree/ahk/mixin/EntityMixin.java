@@ -28,6 +28,7 @@ public abstract class EntityMixin {
     @Inject(method = "dropStack(Lnet/minecraft/item/ItemStack;F)Lnet/minecraft/entity/ItemEntity;", at = @At("HEAD"), cancellable = true)
     public void dropStackInject(ItemStack itemStack, float yOffset, CallbackInfoReturnable<ItemEntity> cir) {
         if (!AchievementHardcoreMod.isAllowDropTotem && itemStack != null && itemStack.getItem() == Items.TOTEM_OF_UNDYING) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowDropTotem);
             cir.setReturnValue(null);
         }
     }

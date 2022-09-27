@@ -18,6 +18,7 @@ public class FireworkRocketItemMixin {
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     public void useInject(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
         if (!AchievementHardcoreMod.isAllowUsingFireworksWhileFly && user.isFallFlying()) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingFireworksWhileFly);
             cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));
         }
     }

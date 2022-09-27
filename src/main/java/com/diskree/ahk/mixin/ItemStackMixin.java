@@ -15,6 +15,7 @@ public abstract class ItemStackMixin {
     @Inject(method = "useOnBlock", at = @At("HEAD"), cancellable = true)
     private void useOnBlockInject(ItemUsageContext context, CallbackInfoReturnable<ActionResult> cir) {
         if (!AchievementHardcoreMod.isAllowPlaceBlocks) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowPlaceBlocks);
             cir.setReturnValue(ActionResult.PASS);
         }
     }

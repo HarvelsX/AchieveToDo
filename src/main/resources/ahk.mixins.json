@@ -28,7 +28,8 @@
     "ShulkerBoxBlockMixin"
   ],
   "client": [
-    "ClientPlayerEntityMixin"
+    "ClientPlayerEntityMixin",
+    "KeyboardInputMixin"
   ],
   "injectors": {
     "defaultRequire": 1

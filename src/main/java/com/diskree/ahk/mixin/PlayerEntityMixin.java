@@ -17,7 +17,8 @@ public abstract class PlayerEntityMixin {
 
     @Inject(method = "jump", at = @At("HEAD"), cancellable = true)
     public void jumpInject(CallbackInfo ci) {
-        if (!AchievementHardcoreMod.isAllowJump) {
+        if (!AchievementHardcoreMod.isAllowJump && !((PlayerEntity) (Object) this).isTouchingWater()) {
+            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowJump);
             ci.cancel();
         }
     }
