@@ -1,6 +1,7 @@
 package com.diskree.ahk.mixin;
 
 import com.diskree.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.BlockedAction;
 import net.minecraft.entity.Entity;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
@@ -15,11 +16,8 @@ public abstract class ServerPlayerEntityMixin {
 
     @Inject(method = "moveToWorld", at = @At("HEAD"), cancellable = true)
     public void moveToWorldInject(ServerWorld destination, CallbackInfoReturnable<Entity> cir) {
-        if (!AchievementHardcoreMod.isAllowMoveToNetherDimension && destination != null && destination.getRegistryKey() == World.NETHER) {
-            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowMoveToNetherDimension);
-            cir.setReturnValue((Entity) (Object) this);
-        } else if (!AchievementHardcoreMod.isAllowMoveToEnderDimension && destination != null && destination.getRegistryKey() == World.END) {
-            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowMoveToEnderDimension);
+        if (destination != null && destination.getRegistryKey() == World.NETHER && AchievementHardcoreMod.isActionBlocked(BlockedAction.NETHER) ||
+                destination != null && destination.getRegistryKey() == World.END && AchievementHardcoreMod.isActionBlocked(BlockedAction.END)) {
             cir.setReturnValue((Entity) (Object) this);
         }
     }

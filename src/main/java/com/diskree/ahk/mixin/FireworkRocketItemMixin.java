@@ -1,6 +1,7 @@
 package com.diskree.ahk.mixin;
 
 import com.diskree.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.BlockedAction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.FireworkRocketItem;
 import net.minecraft.item.ItemStack;
@@ -17,8 +18,7 @@ public class FireworkRocketItemMixin {
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     public void useInject(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
-        if (!AchievementHardcoreMod.isAllowUsingFireworksWhileFly && user.isFallFlying()) {
-            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingFireworksWhileFly);
+        if (user.isFallFlying() && AchievementHardcoreMod.isActionBlocked(BlockedAction.USING_FIREWORKS_WHILE_FLY)) {
             cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));
         }
     }

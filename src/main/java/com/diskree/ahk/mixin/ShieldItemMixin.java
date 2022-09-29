@@ -1,6 +1,7 @@
 package com.diskree.ahk.mixin;
 
 import com.diskree.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.BlockedAction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
@@ -17,8 +18,7 @@ public class ShieldItemMixin {
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     public void useInject(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
-        if (!AchievementHardcoreMod.isAllowUsingShield) {
-            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingShield);
+        if (AchievementHardcoreMod.isActionBlocked(BlockedAction.USING_SHIELD)) {
             cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));
         }
     }

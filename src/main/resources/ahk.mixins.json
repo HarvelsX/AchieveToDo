@@ -20,12 +20,12 @@
     "ItemMixin",
     "ItemStackMixin",
     "LivingEntityMixin",
-    "MerchantEntityMixin",
     "PlayerEntityMixin",
     "ScoreboardPlayerScoreMixin",
     "ServerPlayerEntityMixin",
     "ShieldItemMixin",
-    "ShulkerBoxBlockMixin"
+    "ShulkerBoxBlockMixin",
+    "VillagerEntityMixin"
   ],
   "client": [
     "ClientPlayerEntityMixin",

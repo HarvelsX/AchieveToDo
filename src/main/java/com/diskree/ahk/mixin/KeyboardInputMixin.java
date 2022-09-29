@@ -1,6 +1,7 @@
 package com.diskree.ahk.mixin;
 
 import com.diskree.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.BlockedAction;
 import net.minecraft.client.input.Input;
 import net.minecraft.client.input.KeyboardInput;
 import org.spongepowered.asm.mixin.Mixin;
@@ -13,9 +14,8 @@ public class KeyboardInputMixin {
 
     @Inject(method = "tick", at = @At("RETURN"))
     public void tickInject(boolean slowDown, float f, CallbackInfo ci) {
-        if (!AchievementHardcoreMod.isAllowSneak && ((Input) ((Object) this)).sneaking) {
+        if (((Input) ((Object) this)).sneaking && AchievementHardcoreMod.isActionBlocked(BlockedAction.SNEAK)) {
             ((Input) ((Object) this)).sneaking = false;
-            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowSneak);
         }
     }
 }

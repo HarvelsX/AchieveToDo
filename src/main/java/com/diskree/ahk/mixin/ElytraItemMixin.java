@@ -1,6 +1,7 @@
 package com.diskree.ahk.mixin;
 
 import com.diskree.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.BlockedAction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ElytraItem;
 import net.minecraft.item.ItemStack;
@@ -17,8 +18,7 @@ public class ElytraItemMixin {
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     public void useInject(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
-        if (!AchievementHardcoreMod.isAllowEquipElytra) {
-            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowEquipElytra);
+        if (AchievementHardcoreMod.isActionBlocked(BlockedAction.EQUIP_ELYTRA)) {
             cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));
         }
     }

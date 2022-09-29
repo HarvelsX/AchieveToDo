@@ -1,6 +1,7 @@
 package com.diskree.ahk.mixin;
 
 import com.diskree.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.BlockedAction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ArmorItem;
 import net.minecraft.item.ArmorMaterial;
@@ -25,14 +26,9 @@ public class ArmorItemMixin {
 
     @Inject(method = "use", at = @At("HEAD"), cancellable = true)
     public void useInject(World world, PlayerEntity user, Hand hand, CallbackInfoReturnable<TypedActionResult<ItemStack>> cir) {
-        if (!AchievementHardcoreMod.isAllowEquipIronArmor && type == ArmorMaterials.IRON) {
-            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowEquipIronArmor);
-            cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));
-        } else if (!AchievementHardcoreMod.isAllowEquipDiamondArmor && type == ArmorMaterials.DIAMOND) {
-            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowEquipDiamondArmor);
-            cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));
-        } else if (!AchievementHardcoreMod.isAllowEquipNetheriteArmor && type == ArmorMaterials.NETHERITE) {
-            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowEquipNetheriteArmor);
+        if (type == ArmorMaterials.IRON && AchievementHardcoreMod.isActionBlocked(BlockedAction.EQUIP_IRON_ARMOR) ||
+                type == ArmorMaterials.DIAMOND && AchievementHardcoreMod.isActionBlocked(BlockedAction.EQUIP_DIAMOND_ARMOR) ||
+                type == ArmorMaterials.NETHERITE && AchievementHardcoreMod.isActionBlocked(BlockedAction.EQUIP_NETHERITE_ARMOR)) {
             cir.setReturnValue(TypedActionResult.fail(user.getStackInHand(hand)));
         }
     }

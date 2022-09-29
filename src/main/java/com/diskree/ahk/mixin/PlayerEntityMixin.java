@@ -1,6 +1,7 @@
 package com.diskree.ahk.mixin;
 
 import com.diskree.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.BlockedAction;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
@@ -17,15 +18,14 @@ public abstract class PlayerEntityMixin {
 
     @Inject(method = "jump", at = @At("HEAD"), cancellable = true)
     public void jumpInject(CallbackInfo ci) {
-        if (!AchievementHardcoreMod.isAllowJump && !((PlayerEntity) (Object) this).isTouchingWater()) {
-            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowJump);
+        if (!((PlayerEntity) (Object) this).isTouchingWater() && AchievementHardcoreMod.isActionBlocked(BlockedAction.JUMP)) {
             ci.cancel();
         }
     }
 
     @Inject(method = "canPlaceOn", at = @At("HEAD"), cancellable = true)
     public void canPlaceOnInject(BlockPos pos, Direction facing, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if (!AchievementHardcoreMod.isAllowPlaceBlocks || !AchievementHardcoreMod.isAllowUsingWaterBucket && stack != null && stack.isOf(Items.WATER_BUCKET)) {
+        if (AchievementHardcoreMod.isActionBlocked(BlockedAction.PLACE_BLOCKS) || stack != null && stack.isOf(Items.WATER_BUCKET) && AchievementHardcoreMod.isActionBlocked(BlockedAction.USING_WATER_BUCKET)) {
             cir.setReturnValue(false);
         }
     }

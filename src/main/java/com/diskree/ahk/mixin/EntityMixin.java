@@ -1,6 +1,7 @@
 package com.diskree.ahk.mixin;
 
 import com.diskree.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.BlockedAction;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.ItemEntity;
 import net.minecraft.entity.player.PlayerEntity;
@@ -27,15 +28,14 @@ public abstract class EntityMixin {
 
     @Inject(method = "dropStack(Lnet/minecraft/item/ItemStack;F)Lnet/minecraft/entity/ItemEntity;", at = @At("HEAD"), cancellable = true)
     public void dropStackInject(ItemStack itemStack, float yOffset, CallbackInfoReturnable<ItemEntity> cir) {
-        if (!AchievementHardcoreMod.isAllowDropTotem && itemStack != null && itemStack.getItem() == Items.TOTEM_OF_UNDYING) {
-            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowDropTotem);
+        if (itemStack != null && itemStack.getItem() == Items.TOTEM_OF_UNDYING && AchievementHardcoreMod.isActionBlocked(BlockedAction.DROP_TOTEM)) {
             cir.setReturnValue(null);
         }
     }
 
     @Inject(method = "checkWaterState", at = @At("RETURN"))
     public void checkWaterStateInject(CallbackInfo ci) {
-        if (!AchievementHardcoreMod.isAllowSprint && ((Object) this) instanceof PlayerEntity && !isTouchingWater() && isSprinting()) {
+        if (((Object) this) instanceof PlayerEntity && !isTouchingWater() && isSprinting() && AchievementHardcoreMod.isActionBlocked(BlockedAction.SPRINT)) {
             setSprinting(false);
         }
     }

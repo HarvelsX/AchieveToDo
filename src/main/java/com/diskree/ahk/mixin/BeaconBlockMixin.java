@@ -1,6 +1,7 @@
 package com.diskree.ahk.mixin;
 
 import com.diskree.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.BlockedAction;
 import net.minecraft.block.BeaconBlock;
 import net.minecraft.block.BlockState;
 import net.minecraft.entity.player.PlayerEntity;
@@ -19,8 +20,7 @@ public class BeaconBlockMixin {
 
     @Inject(method = "onUse", at = @At("HEAD"), cancellable = true)
     public void onUseInject(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit, CallbackInfoReturnable<ActionResult> cir) {
-        if (!AchievementHardcoreMod.isAllowUsingBeacon) {
-            AchievementHardcoreMod.showPreventUsage(AchievementHardcoreMod.countForAllowUsingBeacon);
+        if (AchievementHardcoreMod.isActionBlocked(BlockedAction.USING_BEACON)) {
             cir.setReturnValue(ActionResult.FAIL);
         }
     }
