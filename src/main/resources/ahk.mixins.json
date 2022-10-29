@@ -29,8 +29,7 @@
   ],
   "client": [
     "ClientPlayerEntityMixin",
-    "CreateWorldScreenMixin",
-    "KeyboardInputMixin"
+    "CreateWorldScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

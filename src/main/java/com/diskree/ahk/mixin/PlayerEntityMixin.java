@@ -25,7 +25,7 @@ public abstract class PlayerEntityMixin {
 
     @Inject(method = "canPlaceOn", at = @At("HEAD"), cancellable = true)
     public void canPlaceOnInject(BlockPos pos, Direction facing, ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
-        if (AchievementHardcoreMod.isActionBlocked(BlockedAction.PLACE_BLOCKS) || stack != null && stack.isOf(Items.WATER_BUCKET) && AchievementHardcoreMod.isActionBlocked(BlockedAction.USING_WATER_BUCKET)) {
+        if (stack != null && stack.isOf(Items.WATER_BUCKET) && AchievementHardcoreMod.isActionBlocked(BlockedAction.USING_WATER_BUCKET)) {
             cir.setReturnValue(false);
         }
     }

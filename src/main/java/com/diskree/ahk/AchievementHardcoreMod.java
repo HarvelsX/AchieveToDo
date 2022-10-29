@@ -4,31 +4,30 @@ import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.minecraft.advancement.Advancement;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.*;
+import net.minecraft.server.integrated.IntegratedServer;
 import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
+import net.minecraft.util.Identifier;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
 import java.util.EnumMap;
-import java.util.List;
 
 public class AchievementHardcoreMod implements ModInitializer {
 
-    private static final List<FoodComponent> blockedFood = new ArrayList<>();
     private static final EnumMap<BlockedAction, Boolean> blockedActions = new EnumMap<>(BlockedAction.class);
-    private static int lastFoodBlockLevel;
     private static int lastAchievementsCount;
 
     public static void showFoodBlockedDescription(FoodComponent food) {
         if (MinecraftClient.getInstance().player == null) {
             return;
         }
-        for (FoodBlockLevel foodBlockLevel : FoodBlockLevel.values()) {
-            if (foodBlockLevel.getFoodList().contains(food)) {
-                int leftAchievementsCount = foodBlockLevel.getAchievementsCountToUnlock() - lastAchievementsCount;
+        for (BlockedAction action : BlockedAction.values()) {
+            if (action.getFoodComponent() == food) {
+                int leftAchievementsCount = action.getAchievementsCountToUnlock() - lastAchievementsCount;
                 MinecraftClient.getInstance().player.sendMessage(Text.of("Эта еда сейчас недоступна. Для разблокировки осталось выполнить достижений: " + leftAchievementsCount).copy().formatted(Formatting.YELLOW), true);
                 break;
             }
@@ -42,11 +41,6 @@ public class AchievementHardcoreMod implements ModInitializer {
             for (BlockedAction action : BlockedAction.values()) {
                 blockedActions.put(action, false);
             }
-            lastFoodBlockLevel = FoodBlockLevel.LEVEL_5.getLevel();
-            blockedFood.clear();
-            for (FoodBlockLevel food : FoodBlockLevel.values()) {
-                blockedFood.addAll(food.getFoodList());
-            }
         }
         if (lastAchievementsCount == count) {
             return;
@@ -55,12 +49,6 @@ public class AchievementHardcoreMod implements ModInitializer {
         for (BlockedAction action : BlockedAction.values()) {
             if (count >= action.getAchievementsCountToUnlock()) {
                 blockedActions.put(action, true);
-            }
-        }
-        for (FoodBlockLevel food : FoodBlockLevel.values()) {
-            if (count >= food.getAchievementsCountToUnlock() && lastFoodBlockLevel > food.getLevel()) {
-                lastFoodBlockLevel = food.getLevel();
-                blockedFood.removeAll(food.getFoodList());
             }
         }
     }
@@ -77,12 +65,33 @@ public class AchievementHardcoreMod implements ModInitializer {
                     .copy()
                     .formatted(Formatting.YELLOW), true
             );
+            grantAHCAdvancement(action);
+            IntegratedServer server = MinecraftClient.getInstance().getServer();
+            if (server != null) {
+                Advancement tab = server.getAdvancementLoader().get(Identifier.of("blazeandcave", "ahk/" + action.name().toLowerCase()));
+                server.getPlayerManager().getPlayerList().get(0).getAdvancementTracker().grantCriterion(tab, "impossible");
+            }
         }
         return true;
     }
 
     public static boolean isFoodBlocked(FoodComponent food) {
-        return lastFoodBlockLevel > 0 && blockedFood.contains(food);
+        for (BlockedAction action : BlockedAction.values()) {
+            if (action.getFoodComponent() == food) {
+                grantAHCAdvancement(action);
+                return action.getAchievementsCountToUnlock() > lastAchievementsCount;
+            }
+        }
+        return false;
+    }
+
+    private static void grantAHCAdvancement(BlockedAction action) {
+        IntegratedServer server = MinecraftClient.getInstance().getServer();
+        if (server == null) {
+            return;
+        }
+        Advancement tab = server.getAdvancementLoader().get(Identifier.of("blazeandcave", "ahk/" + action.name().toLowerCase()));
+        server.getPlayerManager().getPlayerList().get(0).getAdvancementTracker().grantCriterion(tab, "impossible");
     }
 
     private boolean isToolBlocked(ItemStack itemStack) {
