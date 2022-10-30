@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:compass"
+    },
+    "title": "Нижний Мир",
+    "description": {
+      "translate": "Возможность перехода в измерение Нижний Мир"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/equip_iron_armor",
+  "criteria": {
+    "ahk_nether": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

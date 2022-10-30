@@ -19,7 +19,7 @@ import java.util.EnumMap;
 public class AchievementHardcoreMod implements ModInitializer {
 
     private static final EnumMap<BlockedAction, Boolean> blockedActions = new EnumMap<>(BlockedAction.class);
-    private static int lastAchievementsCount;
+    public static int lastAchievementsCount;
 
     public static void showFoodBlockedDescription(FoodComponent food) {
         if (MinecraftClient.getInstance().player == null) {
@@ -91,7 +91,9 @@ public class AchievementHardcoreMod implements ModInitializer {
             return;
         }
         Advancement tab = server.getAdvancementLoader().get(Identifier.of("blazeandcave", "ahk/" + action.name().toLowerCase()));
-        server.getPlayerManager().getPlayerList().get(0).getAdvancementTracker().grantCriterion(tab, "impossible");
+        if (server.getPlayerManager() != null && !server.getPlayerManager().getPlayerList().isEmpty()) {
+            server.getPlayerManager().getPlayerList().get(0).getAdvancementTracker().grantCriterion(tab, "impossible");
+        }
     }
 
     private boolean isToolBlocked(ItemStack itemStack) {

@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:rabbit"
+    },
+    "title": "Сырая крольчатина",
+    "description": {
+      "translate": "Возможность есть сырую крольчатину"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/eat_mutton",
+  "criteria": {
+    "ahk_eat_rabbit": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

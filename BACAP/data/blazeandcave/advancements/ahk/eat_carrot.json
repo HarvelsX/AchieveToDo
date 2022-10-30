@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:carrot"
+    },
+    "title": "Морковь",
+    "description": {
+      "translate": "Возможность есть морковь"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/eat_beetroot_soup",
+  "criteria": {
+    "ahk_eat_carrot": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

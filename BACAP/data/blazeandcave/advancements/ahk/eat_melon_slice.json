@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:melon_slice"
+    },
+    "title": "Ломтик арбуза",
+    "description": {
+      "translate": "Возможность есть ломтик арбуза"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/eat_dried_kelp",
+  "criteria": {
+    "ahk_eat_melon_slice": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

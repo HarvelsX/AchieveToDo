@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:bread"
+    },
+    "title": "Хлеб",
+    "description": {
+      "translate": "Возможность есть хлеб"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/eat_beef",
+  "criteria": {
+    "ahk_eat_bread": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

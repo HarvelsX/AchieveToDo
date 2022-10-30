@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:beacon"
+    },
+    "title": "Маяк",
+    "description": {
+      "translate": "Возможность использовать эффекты маяка"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/using_brewing_stand",
+  "criteria": {
+    "ahk_using_beacon": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

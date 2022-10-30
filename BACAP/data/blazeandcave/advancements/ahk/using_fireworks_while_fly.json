@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:firework_rocket"
+    },
+    "title": "Фейерверки",
+    "description": {
+      "translate": "Возможность использовать фейерверки во время полёта на элитрах"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/equip_elytra",
+  "criteria": {
+    "ahk_using_fireworks_while_fly": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

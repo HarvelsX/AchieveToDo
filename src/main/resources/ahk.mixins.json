@@ -18,8 +18,8 @@
     "EntityMixin",
     "FireworkRocketItemMixin",
     "ItemMixin",
-    "ItemStackMixin",
     "LivingEntityMixin",
+    "PlayerAdvancementTrackerMixin",
     "PlayerEntityMixin",
     "ScoreboardPlayerScoreMixin",
     "ServerPlayerEntityMixin",
@@ -28,8 +28,10 @@
     "VillagerEntityMixin"
   ],
   "client": [
+    "AdvancementTabTypeMixin",
     "ClientPlayerEntityMixin",
-    "CreateWorldScreenMixin"
+    "CreateWorldScreenMixin",
+    "MinecraftClientMixin"
   ],
   "injectors": {
     "defaultRequire": 1

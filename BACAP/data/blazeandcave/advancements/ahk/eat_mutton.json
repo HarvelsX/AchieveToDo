@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:mutton"
+    },
+    "title": "Сырая баранина",
+    "description": {
+      "translate": "Возможность есть сырую баранину"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/eat_suspicious_stew",
+  "criteria": {
+    "ahk_eat_mutton": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

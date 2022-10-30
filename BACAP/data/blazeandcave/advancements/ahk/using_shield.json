@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:shield"
+    },
+    "title": "Щит",
+    "description": {
+      "translate": "Возможность использовать щит"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/using_furnace",
+  "criteria": {
+    "ahk_using_shield": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

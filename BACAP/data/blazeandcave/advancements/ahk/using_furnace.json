@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:furnace"
+    },
+    "title": "Печь",
+    "description": {
+      "translate": "Возможность использовать печь"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/using_crafting_table",
+  "criteria": {
+    "ahk_using_furnace": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

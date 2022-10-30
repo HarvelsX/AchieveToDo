@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:cookie"
+    },
+    "title": "Печенье",
+    "description": {
+      "translate": "Возможность есть печенье"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/eat_melon_slice",
+  "criteria": {
+    "ahk_eat_cookie": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

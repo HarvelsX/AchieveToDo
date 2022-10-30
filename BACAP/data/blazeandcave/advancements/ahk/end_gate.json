@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:end_stone"
+    },
+    "title": "Энд-гейт",
+    "description": {
+      "translate": "Возможность перехода в Дальний Энд"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/break_blocks_in_negative_y",
+  "criteria": {
+    "ahk_end_gate": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

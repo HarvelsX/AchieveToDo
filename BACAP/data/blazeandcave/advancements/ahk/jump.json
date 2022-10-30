@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:compass"
+    },
+    "title": "Прыжок",
+    "description": {
+      "translate": "Возможность прыгать"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/root",
+  "criteria": {
+    "ahk_jump": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

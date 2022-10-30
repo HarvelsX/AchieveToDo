@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:cooked_porkchop"
+    },
+    "title": "Жареная свинина",
+    "description": {
+      "translate": "Возможность есть жареную свинину"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/eat_cooked_mutton",
+  "criteria": {
+    "ahk_eat_cooked_porkchop": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}

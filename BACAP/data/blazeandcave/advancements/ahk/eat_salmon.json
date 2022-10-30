@@ -1,0 +1,19 @@
+{
+  "display": {
+    "icon": {
+      "item": "minecraft:salmon"
+    },
+    "title": "Сырой лосось",
+    "description": {
+      "translate": "Возможность есть сырой лосось"
+    },
+    "show_toast": false,
+    "announce_to_chat": false
+  },
+  "parent": "blazeandcave:ahk/root",
+  "criteria": {
+    "ahk_eat_salmon": {
+      "trigger": "minecraft:impossible"
+    }
+  }
+}
