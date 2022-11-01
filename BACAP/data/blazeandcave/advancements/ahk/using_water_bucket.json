@@ -3,7 +3,7 @@
     "icon": {
       "item": "minecraft:water_bucket"
     },
-    "title": "Ведро воды",
+    "title": "Разливать воду из ведра",
     "description": {
       "translate": "Возможность разливать воду из ведра"
     },

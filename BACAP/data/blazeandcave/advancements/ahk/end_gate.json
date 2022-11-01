@@ -1,9 +1,9 @@
 {
   "display": {
     "icon": {
-      "item": "minecraft:end_stone"
+      "item": "minecraft:end_stone_bricks"
     },
-    "title": "Энд-гейт",
+    "title": "Дальний Энд",
     "description": {
       "translate": "Возможность перехода в Дальний Энд"
     },

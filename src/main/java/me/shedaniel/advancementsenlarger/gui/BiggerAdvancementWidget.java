@@ -60,7 +60,7 @@ public class BiggerAdvancementWidget extends DrawableHelper {
         if (advancement.getId().getNamespace().equals("blazeandcave") && advancement.getId().getPath().startsWith("ahk/")) {
             String key = advancement.getId().getPath().split("ahk/")[1];
             if (!key.equals("root")) {
-                i = 2;
+                i = BlockedAction.valueOf(key.toUpperCase()).getAchievementsCountToUnlock();
             }
         }
         int j = String.valueOf(i).length();

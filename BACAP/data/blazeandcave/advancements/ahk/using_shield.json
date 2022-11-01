@@ -3,7 +3,7 @@
     "icon": {
       "item": "minecraft:shield"
     },
-    "title": "Щит",
+    "title": "Использовать щит",
     "description": {
       "translate": "Возможность использовать щит"
     },

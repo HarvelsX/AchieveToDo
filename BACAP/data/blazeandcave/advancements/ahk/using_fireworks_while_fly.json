@@ -3,7 +3,7 @@
     "icon": {
       "item": "minecraft:firework_rocket"
     },
-    "title": "Фейерверки",
+    "title": "Фейерверки при полёте",
     "description": {
       "translate": "Возможность использовать фейерверки во время полёта на элитрах"
     },
