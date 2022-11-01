@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "ahk:item/mystery_mask_item"
+  }
+}

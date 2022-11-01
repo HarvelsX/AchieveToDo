@@ -1,9 +1,11 @@
 package com.diskree.ahk;
 
+import me.shedaniel.advancementsenlarger.gui.AHKAdvancementToast;
 import net.fabricmc.api.ModInitializer;
 import net.fabricmc.fabric.api.event.player.AttackBlockCallback;
 import net.fabricmc.fabric.api.event.player.AttackEntityCallback;
 import net.fabricmc.fabric.api.event.player.UseBlockCallback;
+import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
 import net.minecraft.advancement.Advancement;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.*;
@@ -12,11 +14,16 @@ import net.minecraft.text.Text;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Formatting;
 import net.minecraft.util.Identifier;
+import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
 import java.util.EnumMap;
+import java.util.List;
 
 public class AchievementHardcoreMod implements ModInitializer {
+
+    public static final Item MYSTERY_MASK_ITEM = new Item(new FabricItemSettings().group(ItemGroup.MISC));
 
     private static final EnumMap<BlockedAction, Boolean> blockedActions = new EnumMap<>(BlockedAction.class);
     public static int lastAchievementsCount;
@@ -45,11 +52,24 @@ public class AchievementHardcoreMod implements ModInitializer {
         if (lastAchievementsCount == count) {
             return;
         }
+        int oldCount = lastAchievementsCount;
         lastAchievementsCount = count;
+        List<BlockedAction> actionsToUnlock = new ArrayList<>();
         for (BlockedAction action : BlockedAction.values()) {
             if (count >= action.getAchievementsCountToUnlock()) {
+                if (oldCount < action.getAchievementsCountToUnlock() && oldCount != 0) {
+                    actionsToUnlock.add(action);
+                }
                 blockedActions.put(action, true);
             }
+        }
+        IntegratedServer server = MinecraftClient.getInstance().getServer();
+        if (server == null) {
+            return;
+        }
+        for (BlockedAction action : actionsToUnlock) {
+            Advancement advancement = server.getAdvancementLoader().get(Identifier.of("blazeandcave", "ahk/" + action.name().toLowerCase()));
+            MinecraftClient.getInstance().getToastManager().add(new AHKAdvancementToast(advancement, action));
         }
     }
 
@@ -66,11 +86,6 @@ public class AchievementHardcoreMod implements ModInitializer {
                     .formatted(Formatting.YELLOW), true
             );
             grantAHCAdvancement(action);
-            IntegratedServer server = MinecraftClient.getInstance().getServer();
-            if (server != null) {
-                Advancement tab = server.getAdvancementLoader().get(Identifier.of("blazeandcave", "ahk/" + action.name().toLowerCase()));
-                server.getPlayerManager().getPlayerList().get(0).getAdvancementTracker().grantCriterion(tab, "impossible");
-            }
         }
         return true;
     }
@@ -92,7 +107,7 @@ public class AchievementHardcoreMod implements ModInitializer {
         }
         Advancement tab = server.getAdvancementLoader().get(Identifier.of("blazeandcave", "ahk/" + action.name().toLowerCase()));
         if (server.getPlayerManager() != null && !server.getPlayerManager().getPlayerList().isEmpty()) {
-            server.getPlayerManager().getPlayerList().get(0).getAdvancementTracker().grantCriterion(tab, "impossible");
+            server.getPlayerManager().getPlayerList().get(0).getAdvancementTracker().grantCriterion(tab, "ahk_" + action.name().toLowerCase());
         }
     }
 
@@ -112,6 +127,7 @@ public class AchievementHardcoreMod implements ModInitializer {
 
     @Override
     public void onInitialize() {
+        Registry.register(Registry.ITEM, new Identifier("ahk", "mystery_mask_item"), MYSTERY_MASK_ITEM);
         AttackBlockCallback.EVENT.register((player, world, hand, pos, direction) -> {
             if (world != null && world.getRegistryKey() == World.OVERWORLD && pos != null) {
                 if (pos.getY() >= 0 && isActionBlocked(BlockedAction.BREAK_BLOCKS_IN_POSITIVE_Y) || pos.getY() < 0 && isActionBlocked(BlockedAction.BREAK_BLOCKS_IN_NEGATIVE_Y)) {

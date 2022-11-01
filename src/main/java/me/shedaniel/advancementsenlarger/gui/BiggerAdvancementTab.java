@@ -1,5 +1,7 @@
 package me.shedaniel.advancementsenlarger.gui;
 
+import com.diskree.ahk.AchievementHardcoreMod;
+import com.diskree.ahk.BlockedAction;
 import com.google.common.collect.Maps;
 import com.mojang.blaze3d.systems.RenderSystem;
 import me.shedaniel.advancementsenlarger.hooks.AdvancementTabTypeHooks;
