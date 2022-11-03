@@ -30,9 +30,9 @@
   "client": [
     "AdvancementTabTypeMixin",
     "ClientPlayerEntityMixin",
-    "CreateWorldScreenMixin",
     "MinecraftClientMixin",
-    "ToastManagerMixin"
+    "ToastManagerMixin",
+    "client.CreateWorldScreenMixin"
   ],
   "injectors": {
     "defaultRequire": 1

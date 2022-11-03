@@ -18,6 +18,7 @@
       "com.diskree.ahk.AchievementHardcoreMod"
     ]
   },
+  "accessWidener": "ahk.accesswidener",
   "mixins": [
     "ahk.mixins.json"
   ],
