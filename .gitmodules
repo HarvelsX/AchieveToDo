@@ -1,0 +1,4 @@
+[submodule "advancements-enlarger"]
+	path = advancements-enlarger
+	url = https://github.com/HarvelsX/advancements-enlarger.git
+	branch = 1.19
